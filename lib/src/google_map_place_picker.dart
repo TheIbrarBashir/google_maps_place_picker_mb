@@ -594,7 +594,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
     appBarKey.currentContext!.findRenderObject() as RenderBox;
     return Positioned(
       top: appBarRenderBox.size.height,
-      right: 15,
+      right: 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -631,7 +631,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
           SizedBox(height: 10),
           enableMapTypeButton!
               ? Container(
-            width: 35,
+            //width: 35,
             height: 35,
             child: RawMaterialButton(
               shape: CircleBorder(),
