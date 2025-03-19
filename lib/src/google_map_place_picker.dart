@@ -40,7 +40,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
     this.debounceMilliseconds,
     this.enableMapTypeButton,
     this.enableMyLocationButton,
-    this.myLocationMessage,
+    this.myLocationToolTip,
     this.onToggleMapType,
     this.onMyLocation,
     this.onPlacePicked,
@@ -77,7 +77,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
   final int? debounceMilliseconds;
   final bool? enableMapTypeButton;
   final bool? enableMyLocationButton;
-  final String? myLocationMessage;
+  final String? myLocationToolTip;
 
   final bool? usePinPointingSearch;
   final bool? usePlaceDetailSearch;
@@ -596,6 +596,8 @@ class GoogleMapPlacePicker extends StatelessWidget {
       top: appBarRenderBox.size.height,
       right: 15,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           enableMyLocationButton!
               ? Container(
@@ -615,8 +617,8 @@ class GoogleMapPlacePicker extends StatelessWidget {
                   onPressed: onMyLocation,
                   child: Icon(Icons.my_location),
                 ),
-                  if(myLocationMessage != null)
-                    Text(myLocationMessage ?? '',
+                  if(myLocationToolTip != null)
+                    Text(myLocationToolTip ?? '',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         decoration:
