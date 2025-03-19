@@ -17,9 +17,9 @@ import 'dart:io' show Platform;
 import 'package:uuid/uuid.dart';
 
 typedef IntroModalWidgetBuilder = Widget Function(
-  BuildContext context,
-  Function? close,
-);
+    BuildContext context,
+    Function? close,
+    );
 
 enum PinState { Preparing, Idle, Dragging }
 
@@ -50,6 +50,7 @@ class PlacePicker extends StatefulWidget {
     this.initialMapType = MapType.normal,
     this.enableMapTypeButton = true,
     this.enableMyLocationButton = true,
+    this.myLocationButtonTooltip,
     this.myLocationButtonCooldown = 10,
     this.usePinPointingSearch = true,
     this.usePlaceDetailSearch = false,
@@ -98,6 +99,7 @@ class PlacePicker extends StatefulWidget {
   final MapType initialMapType;
   final bool enableMapTypeButton;
   final bool enableMyLocationButton;
+  final String? myLocationButtonTooltip;
   final int myLocationButtonCooldown;
 
   final bool usePinPointingSearch;
@@ -301,7 +303,9 @@ class _PlacePickerState extends State<PlacePicker> {
                     appBar: AppBar(
                       key: appBarKey,
                       automaticallyImplyLeading: false,
-                      iconTheme: Theme.of(context).iconTheme,
+                      iconTheme: Theme
+                          .of(context)
+                          .iconTheme,
                       elevation: 0,
                       backgroundColor: Colors.transparent,
                       titleSpacing: 0.0,
@@ -319,7 +323,10 @@ class _PlacePickerState extends State<PlacePicker> {
               children.addAll([
                 Icon(
                   Icons.error_outline,
-                  color: Theme.of(context).colorScheme.error,
+                  color: Theme
+                      .of(context)
+                      .colorScheme
+                      .error,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 16),
@@ -348,25 +355,25 @@ class _PlacePickerState extends State<PlacePicker> {
       children: <Widget>[
         SizedBox(width: 15),
         provider!.placeSearchingState == SearchingState.Idle &&
-                (widget.automaticallyImplyAppBarLeading ||
-                    widget.onTapBack != null)
+            (widget.automaticallyImplyAppBarLeading ||
+                widget.onTapBack != null)
             ? IconButton(
-                onPressed: () {
-                  if (!showIntroModal ||
-                      widget.introModalWidgetBuilder == null) {
-                    provider?.debounceTimer?.cancel();
-                    if (widget.onTapBack != null) {
-                      widget.onTapBack!();
-                      return;
-                    }
-                    Navigator.maybePop(context);
-                  }
-                },
-                icon: Icon(
-                  Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
-                ),
-                color: Colors.black.withAlpha(128),
-                padding: EdgeInsets.zero)
+            onPressed: () {
+              if (!showIntroModal ||
+                  widget.introModalWidgetBuilder == null) {
+                provider?.debounceTimer?.cancel();
+                if (widget.onTapBack != null) {
+                  widget.onTapBack!();
+                  return;
+                }
+                Navigator.maybePop(context);
+              }
+            },
+            icon: Icon(
+              Platform.isIOS ? Icons.arrow_back_ios : Icons.arrow_back,
+            ),
+            color: Colors.black.withAlpha(128),
+            padding: EdgeInsets.zero)
             : Container(),
         Expanded(
           child: AutoCompleteSearch(
@@ -396,7 +403,7 @@ class _PlacePickerState extends State<PlacePicker> {
               initialSearchString: widget.initialSearchString,
               searchForInitialValue: widget.searchForInitialValue,
               autocompleteOnTrailingWhitespace:
-                  widget.autocompleteOnTrailingWhitespace),
+              widget.autocompleteOnTrailingWhitespace),
         ),
         SizedBox(width: 5),
       ],
@@ -407,7 +414,7 @@ class _PlacePickerState extends State<PlacePicker> {
     provider!.placeSearchingState = SearchingState.Searching;
 
     final PlacesDetailsResponse response =
-        await provider!.places.getDetailsByPlaceId(
+    await provider!.places.getDetailsByPlaceId(
       prediction.placeId!,
       sessionToken: provider!.sessionToken,
       language: widget.autocompleteLanguage,
@@ -471,6 +478,7 @@ class _PlacePickerState extends State<PlacePicker> {
       debounceMilliseconds: widget.cameraMoveDebounceInMilliseconds,
       enableMapTypeButton: widget.enableMapTypeButton,
       enableMyLocationButton: widget.enableMyLocationButton,
+      myLocationMessage: widget.myLocationButtonTooltip,
       usePinPointingSearch: widget.usePinPointingSearch,
       usePlaceDetailSearch: widget.usePlaceDetailSearch,
       onMapCreated: widget.onMapCreated,
@@ -517,31 +525,31 @@ class _PlacePickerState extends State<PlacePicker> {
   Widget _buildIntroModal(BuildContext context) {
     return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
-      return showIntroModal && widget.introModalWidgetBuilder != null
-          ? Stack(children: [
-              Positioned(
-                top: 0,
-                right: 0,
-                bottom: 0,
-                left: 0,
-                child: Material(
-                  type: MaterialType.canvas,
-                  color: Color.fromARGB(128, 0, 0, 0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
-                  child: ClipRect(),
+          return showIntroModal && widget.introModalWidgetBuilder != null
+              ? Stack(children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              child: Material(
+                type: MaterialType.canvas,
+                color: Color.fromARGB(128, 0, 0, 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
                 ),
+                child: ClipRect(),
               ),
-              widget.introModalWidgetBuilder!(context, () {
-                if (mounted) {
-                  setState(() {
-                    showIntroModal = false;
-                  });
-                }
-              })
-            ])
-          : Container();
-    });
+            ),
+            widget.introModalWidgetBuilder!(context, () {
+              if (mounted) {
+                setState(() {
+                  showIntroModal = false;
+                });
+              }
+            })
+          ])
+              : Container();
+        });
   }
 }
