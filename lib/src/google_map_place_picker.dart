@@ -596,7 +596,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
     appBarKey.currentContext!.findRenderObject() as RenderBox;
     return Positioned(
       top: appBarRenderBox.size.height,
-      right: 5,
+      right: appBarRenderBox.size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -607,7 +607,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
               height: 35,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[RawMaterialButton(
                   shape: CircleBorder(),
                   fillColor: Theme
@@ -619,8 +619,8 @@ class GoogleMapPlacePicker extends StatelessWidget {
                   onPressed: onMyLocation,
                   child: Icon(Icons.my_location),
                 ),
-                                   if(locationToolTip != null)
-                                   locationToolTip??SizedBox(),
+                  if(locationToolTip != null)
+                   locationToolTip ?? SizedBox(),
                   if(myLocationToolTip != null)
                     Text(myLocationToolTip ?? '',
                       style: TextStyle(
