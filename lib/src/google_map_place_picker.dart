@@ -603,7 +603,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
           enableMyLocationButton!
               ? Container(
             //width: 35,
-              height: 35,
+              height: 45,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
