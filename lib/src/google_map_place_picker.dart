@@ -606,8 +606,9 @@ class GoogleMapPlacePicker extends StatelessWidget {
               height: 45,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[RawMaterialButton(
+                    padding: EdgeInsets.zero,
                   shape: CircleBorder(),
                   fillColor: Theme
                       .of(context)
