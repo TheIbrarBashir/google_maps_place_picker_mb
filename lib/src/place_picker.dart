@@ -480,7 +480,6 @@ class _PlacePickerState extends State<PlacePicker> {
       debounceMilliseconds: widget.cameraMoveDebounceInMilliseconds,
       enableMapTypeButton: widget.enableMapTypeButton,
       enableMyLocationButton: widget.enableMyLocationButton,
-      myLocationMessage: widget.myLocationButtonTooltip,
       locationToolTip: widget.locationToolTip,
       usePinPointingSearch: widget.usePinPointingSearch,
       usePlaceDetailSearch: widget.usePlaceDetailSearch,
