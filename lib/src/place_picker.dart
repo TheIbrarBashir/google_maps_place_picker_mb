@@ -51,6 +51,7 @@ class PlacePicker extends StatefulWidget {
     this.enableMapTypeButton = true,
     this.enableMyLocationButton = true,
     this.myLocationButtonTooltip,
+      this.locationToolTip,
     this.myLocationButtonCooldown = 10,
     this.usePinPointingSearch = true,
     this.usePlaceDetailSearch = false,
@@ -100,6 +101,7 @@ class PlacePicker extends StatefulWidget {
   final bool enableMapTypeButton;
   final bool enableMyLocationButton;
   final String? myLocationButtonTooltip;
+    final Widget? locationToolTip;
   final int myLocationButtonCooldown;
 
   final bool usePinPointingSearch;
@@ -479,6 +481,7 @@ class _PlacePickerState extends State<PlacePicker> {
       enableMapTypeButton: widget.enableMapTypeButton,
       enableMyLocationButton: widget.enableMyLocationButton,
       myLocationMessage: widget.myLocationButtonTooltip,
+      locationToolTip: widget.locationToolTip,
       usePinPointingSearch: widget.usePinPointingSearch,
       usePlaceDetailSearch: widget.usePlaceDetailSearch,
       onMapCreated: widget.onMapCreated,
