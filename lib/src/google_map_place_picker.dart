@@ -620,7 +620,7 @@ class GoogleMapPlacePicker extends StatelessWidget {
                   child: Icon(Icons.my_location),
                 ),
                   if(locationToolTip != null)
-                   locationToolTip ?? SizedBox(),
+                   InkWell(child: locationToolTip,onTap: onMyLocation,) ?? SizedBox(),
                   if(myLocationToolTip != null)
                     Text(myLocationToolTip ?? '',
                       style: TextStyle(
